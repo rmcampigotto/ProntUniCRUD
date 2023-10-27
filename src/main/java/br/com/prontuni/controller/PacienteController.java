@@ -17,6 +17,10 @@ public class PacienteController {
 
     @PostMapping("/insert")
     public Paciente Insert(@RequestBody Paciente paciente) throws PacienteException {
+        int id = count(pacienteRepository.findAll());
+        id++;
+
+        paciente.setId(id);
         pacienteRepository.save(paciente);
         return selectById(paciente.getId());
     }
@@ -44,6 +48,15 @@ public class PacienteController {
     @GetMapping("/selectID/{id}")
     public Paciente selectById(@PathVariable int id) throws PacienteException {
         return pacienteRepository.findById(id).orElseThrow(PacienteException::new);
+    }
+
+    public int count(List<Paciente> pacientes){
+        int contagem = 0;
+
+        for (Paciente p: pacientes) {
+            contagem++;
+        }
+        return contagem;
     }
 
 }
