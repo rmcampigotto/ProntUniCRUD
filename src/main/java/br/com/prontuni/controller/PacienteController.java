@@ -54,7 +54,7 @@ public class PacienteController {
     public int count(List<Paciente> pacientes){
         int contagem = 0;
 
-        for (Paciente p: pacientes) {
+        for (Paciente ignored : pacientes) {
             contagem++;
         }
         return contagem;
