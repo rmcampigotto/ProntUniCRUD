@@ -25,19 +25,20 @@ public class PacienteController {
         return selectById(paciente.getId());
     }
 
-    @PutMapping("/update")
-    public Paciente updateNameById(@RequestParam("id") int id, @RequestParam("nome") String nome) throws PacienteException {
-        if(pacienteRepository.findById(id).isPresent()){
-            Paciente paciente = pacienteRepository.findById(id).get();
+    @PutMapping("/update/{id}")
+    public Paciente updateById(@PathVariable int id, @RequestBody Paciente edit) throws PacienteException {
+        Paciente pacientedb = pacienteRepository.findById(id).orElseThrow(PacienteException::new);
 
-            paciente.setNome(nome);
+        pacientedb.setId(id);
+        pacientedb.setNome(edit.getNome());
+        pacientedb.setDataNascimento(edit.getDataNascimento());
+        pacientedb.setGenero(edit.getGenero());
+        pacientedb.setEndereco(edit.getEndereco());
+        pacientedb.setCidade(edit.getCidade());
+        pacientedb.setTelefone(edit.getTelefone());
+        pacientedb.setUbs(edit.getUbs());
 
-            pacienteRepository.save(paciente);
-
-            return selectById(id);
-        }else{
-            return null;
-        }
+        return pacienteRepository.save(pacientedb);
     }
 
     @GetMapping("/selectFull")
