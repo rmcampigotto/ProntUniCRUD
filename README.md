@@ -47,9 +47,6 @@ END;
 
 COMMIT;
 
-INSERT INTO Paciente(id,nome,dt_nasc,genero,endereco,cidade,telefone,ubs) 
-VALUES (1, 'Rafael', '14/10/2004','M','Rua Interventor Manoel Ribas, 56','Mandaguari',44997003374,'CENTRO - MANDAGUARI');
-
 SELECT * FROM Paciente;
 select * from Paciente_Log;
 ```
